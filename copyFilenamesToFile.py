@@ -1,5 +1,5 @@
-#pull all filenames and concatenate those with the same prefix (eg all files starting with "CL54.Contig10_S4" are concatenated)
-#usage: python readFilenames.py /path/to/dir/.extension
+#read all filenames with a specific extension (using "*.extension") and put names into a file.
+#usage python copyFilenamesToFile.py directory/*extension
 
 import glob
 from sys import argv

@@ -9,9 +9,12 @@ import os
 import glob
 
 filenames = glob.glob("*fasta")
+print "Making new nexus directory..."
+os.system("mkdir nexus")
 
 for i in range(len(filenames)):
 	file=str(filenames[i])
+	print "Converting %s..." % (file)
 	fasta = open(file, "r")
 	names, sequences = [], []
 	data = fasta.read().split(">")
@@ -22,8 +25,7 @@ for i in range(len(filenames)):
 		names.append(data[i].split()[0])
 		sequences.append("".join(data[i].splitlines()[1:]))
 	#print names
-	ntax = str(len(names))
-	#print ntax
+
 	longestseq = 0
 	
 	for i in range(len(sequences)):
@@ -33,14 +35,14 @@ for i in range(len(filenames)):
 			pass
 			
 	nchar = str(longestseq)
-	#print nchar
+	ntax = str(len(names))
 	
-	nexus = open(file+".nexus", "w")
+	nexus = open("nexus/" + '.'.join(file.split(".")[:-1]) + ".nexus", "w")
 	nexus.write("#NEXUS\nBegin data;\nDimensions ntax=%s nchar=%s;\nformat datatype=dna missing=-;\nmatrix\n\n" % (ntax, nchar))
 	for i in range(len(names)):
 		nexus.write(names[i] + " " + sequences[i] + "\n")
 	nexus.write(";\nend;")
-	#print names[1] + sequences[1]
+	print "Conversion of %s completed." % (file)
 	fasta.close()
 	nexus.close()
 			

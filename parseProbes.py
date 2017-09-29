@@ -11,10 +11,10 @@ not use sequence similarity to ID homologous sequences. This program was origina
 designed to be used on consensus sequences following read mapping to a probe-set in 
 geneious.
 
-Put all sample files (should end in *assembly.fasta), this script, and the probe design file into a single directory
-and run the program. All sample files should end in ".fasta" and the probe file should
-be called "blocks_for_probe_design.fasta" (or you can modify the script here to read 
-whatever you name your file).
+Put all sample files (should end in *assembly.fasta), this script, and the probe design 
+file into a single directory and run the program. The probe file should be called 
+"blocks_for_probe_design.fasta" (or you can modify the script here to read whatever you 
+name your file).
 """
 
 import os
@@ -59,7 +59,7 @@ for filename in glob.glob("*assembly.fasta"):
 		for k in range(len(sample_contig_names)):
 			if probe_names[i] == sample_contig_names[k]:
 				individual_probe_fasta.write(">" + str(filename.split(".")[0]) + "_" + str(sample_contig_names[k]) + "\n")
-				individual_probe_fasta.write(str(sample_contig_sequences[k]) + "\n")
+				individual_probe_fasta.write(str(sample_contig_sequences[k]))
 			else:
 				pass
 
